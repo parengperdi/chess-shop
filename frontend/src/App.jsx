@@ -1,8 +1,11 @@
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./router";
+
 function App() {
   return (
-    <>
-      <h1 className="text-4xl font-bold text-red-600">hi in pink</h1>
-    </>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 
