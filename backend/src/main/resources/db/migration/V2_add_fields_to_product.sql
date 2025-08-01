@@ -1,0 +1,3 @@
+ALTER TABLE shop ADD rating DOUBLE DEFAULT 0;
+ALTER TABLE shop ADD number_of_sales INT DEFAULT 0;
+ALTER TABLE shop ADD image_url VARCHAR(255);

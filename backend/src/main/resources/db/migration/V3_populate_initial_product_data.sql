@@ -1,0 +1,1 @@
+UPDATE shop SET rating = 4.5, number_of_sales = 20 WHERE id = 1;

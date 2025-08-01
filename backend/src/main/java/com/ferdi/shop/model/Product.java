@@ -25,4 +25,7 @@ public class Product {
     private String category;
     private Date releaseDate;
     private int quantity;
+    private double rating;
+    private int numberOfSales;
+    private String imageUrl;
 }
