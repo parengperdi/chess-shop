@@ -5,13 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Data
-@Table(name="shop")
+@Table(name = "shop")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
@@ -27,5 +26,5 @@ public class Product {
     private int quantity;
     private double rating;
     private int numberOfSales;
-    private String imageUrl;
+    private String imageUrl = "/uploads/default.png";
 }
