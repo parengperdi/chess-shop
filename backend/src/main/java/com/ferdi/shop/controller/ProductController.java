@@ -33,7 +33,7 @@ public class ProductController {
     }
 
     // Create a new product
-    @PostMapping("/products")
+    @PostMapping(value = "/api/products", consumes = "multipart/form-data")
     public Product createProduct(@RequestBody Product product) {
         return service.saveProduct(product);
     }
