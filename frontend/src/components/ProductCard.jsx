@@ -1,10 +1,31 @@
 import React from "react";
 
-const ProductCard = ({ product }) => {
+
+  const ProductCard = ({ product }) => {
+     // Fallback image if product.imageUrl is missing or broken
+    const imageUrl = product.imageUrl
+    ? `http://localhost:8080${product.imageUrl}`
+    : null;
+
+  const handleImageError = (e) => {
+    e.target.onerror = null; // Prevent infinite loop
+    e.target.src = ""; // or you can use a placeholder text/image URL
+  };
+
   return (
     <div className="bg-stone-500 p-4 rounded-xl ">
-      <div>
-        <img className="w-full object-cover rounded-lg" src={`http://localhost:8080${product.imageUrl}`} alt={product.name} />
+      <div className="bg-stone-500  rounded-xl w-auto">
+        <div className="w-full h-48 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center" >
+          {product.imageUrl ? (
+            <img
+              src={`http://localhost:8080${product.imageUrl}`} 
+              alt={product.name}
+              onError={handleImageError}
+              className="w-full h-full object-cover" />
+          ) : (
+            <span className="text-gray-600">No Image</span>
+          )}
+        </div>
       </div>
       <div className="flex gap-4">
       <h2 className="text-lg font-semibold pl-1">{product.name}</h2>

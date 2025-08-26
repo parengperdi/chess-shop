@@ -40,12 +40,13 @@ public class ProductController {
     // Create a new product
     @PostMapping(value = "/products", consumes = "multipart/form-data")
     public Product createProduct(@ModelAttribute ProductCreateRequest request) throws IOException {
+        String uploadDir = System.getProperty("user.dir") + "/uploads";
+        Files.createDirectories(Paths.get(uploadDir));
         // Handle file upload
-        String imageUrl = "/uploads/default.png";
+        String imageUrl = null;
         if (request.getImage() != null && !request.getImage().isEmpty()) {
             String fileName = System.currentTimeMillis() + "_" + request.getImage().getOriginalFilename();
-            Path filePath = Paths.get("uploads").resolve(fileName);
-            Files.createDirectories(filePath.getParent());
+            Path filePath = Paths.get(uploadDir, fileName);
             request.getImage().transferTo(filePath.toFile());
             imageUrl = "/uploads/" + fileName;
         }
@@ -56,7 +57,6 @@ public class ProductController {
         product.setBrand(request.getBrand());
         product.setPrice(request.getPrice());
         product.setCategory(request.getCategory());
-        product.setReleaseDate(request.getReleaseDate());
         product.setQuantity(request.getQuantity());
         product.setRating(request.getRating());
         product.setNumberOfSales(request.getNumberOfSales());
