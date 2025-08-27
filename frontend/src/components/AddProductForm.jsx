@@ -38,15 +38,15 @@ const AddProductForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-      <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} required />
-      <input type="text" placeholder="Brand" value={brand} onChange={e => setBrand(e.target.value)} required />
-      <input type="number" placeholder="Price" value={price} onChange={e => setPrice(e.target.value)} required />
-      <input type="text" placeholder="Category" value={category} onChange={e => setCategory(e.target.value)} required />
-      <input type="number" placeholder="Quantity" value={quantity} onChange={e => setQuantity(e.target.value)} required />
-      <input type="number" placeholder="Rating" value={rating} onChange={e => setRating(e.target.value)} step="0.1" required />
-      <input type="number" placeholder="Number of Sales" value={numberOfSales} onChange={e => setNumberOfSales(e.target.value)} required />
-      <input type="file" onChange={e => setImageFile(e.target.files[0])} />
-      <button type="submit" className="bg-blue-600 text-white p-2 rounded">Add Product</button>
+      <input className="border-black border-2 p-1 w-36" type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} required />
+      <input className="border-black border-2 p-1 w-36" type="text" placeholder="Brand" value={brand} onChange={e => setBrand(e.target.value)} required />
+      <input className="border-black border-2 p-1 w-36" type="number" placeholder="Price" value={price} onChange={e => setPrice(e.target.value)} required />
+      <input className="border-black border-2 p-1 w-36" type="text" placeholder="Category" value={category} onChange={e => setCategory(e.target.value)} required />
+      <input className="border-black border-2 p-1 w-36" type="number" placeholder="Quantity" value={quantity} onChange={e => setQuantity(e.target.value)} required />
+      <input className="border-black border-2 p-1 w-36" type="number" placeholder="Rating" value={rating} onChange={e => setRating(e.target.value)} step="0.1" required />
+      <input className="border-black border-2 p-1 w-36" type="number" placeholder="Number of Sales" value={numberOfSales} onChange={e => setNumberOfSales(e.target.value)} required />
+      <input className="border-black border-2 p-1 w-36" type="file" onChange={e => setImageFile(e.target.files[0])} />
+      <button type="submit" className="bg-blue-600 text-white p-2 rounded w-36 p-auto">Add Product</button>
     </form>
   );
 };
