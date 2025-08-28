@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "shop")
+@Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
