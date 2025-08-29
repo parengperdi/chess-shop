@@ -34,13 +34,57 @@ const AddProductForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-      <input className="border-black border-2 p-1 w-36 rounded-md" type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} required />
-      <input className="border-black border-2 p-1 w-36 rounded-md" type="text" placeholder="Brand" value={brand} onChange={e => setBrand(e.target.value)} required />
-      <input className="border-black border-2 p-1 w-36 rounded-md" type="number" placeholder="Price" value={price} onChange={e => setPrice(e.target.value)} required />
-      <input className="border-black border-2 p-1 w-36 rounded-md" type="text" placeholder="Category" value={category} onChange={e => setCategory(e.target.value)} required />
-      <input className="border-black border-2 p-1 w-36 rounded-md" type="number" placeholder="Quantity" value={quantity} onChange={e => setQuantity(e.target.value)} required />
-      <input className="border-black border-2 p-1 w-36 rounded-md" type="file" onChange={e => setImageFile(e.target.files[0])} />
-      <button type="submit" className="bg-blue-600 text-white p-2 rounded w-36 p-auto">Add Product</button>
+      <input
+        className="border-black border-2 p-1 w-36 rounded-md"
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
+      <input
+        className="border-black border-2 p-1 w-36 rounded-md"
+        type="text"
+        placeholder="Brand"
+        value={brand}
+        onChange={(e) => setBrand(e.target.value)}
+        required
+      />
+      <input
+        className="border-black border-2 p-1 w-36 rounded-md"
+        type="number"
+        placeholder="Price"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+        required
+      />
+      <input
+        className="border-black border-2 p-1 w-36 rounded-md"
+        type="text"
+        placeholder="Category"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        required
+      />
+      <input
+        className="border-black border-2 p-1 w-36 rounded-md"
+        type="number"
+        placeholder="Quantity"
+        value={quantity}
+        onChange={(e) => setQuantity(e.target.value)}
+        required
+      />
+      <input
+        className="border-black border-2 p-1 w-36 rounded-md"
+        type="file"
+        onChange={(e) => setImageFile(e.target.files[0])}
+      />
+      <button
+        type="submit"
+        className="bg-blue-600 text-white p-2 rounded w-36 p-auto"
+      >
+        Add Product
+      </button>
     </form>
   );
 };
