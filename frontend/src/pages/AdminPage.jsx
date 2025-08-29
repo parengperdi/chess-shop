@@ -23,8 +23,8 @@ const AdminPage = () => {
             onEdit={(product) => {
               console.log("Edited", product.id);
             }}
-            onDelete={(product) => {
-              console.log("Deleted", product.id);
+            onDelete={(id) => {
+              setProducts((prev) => prev.filter((p) => p.id !== id));
             }}
             onToggleActive={(product) => {
               console.log("deactivated", product.id);

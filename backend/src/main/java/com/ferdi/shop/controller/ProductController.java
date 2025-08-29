@@ -4,6 +4,7 @@ import com.ferdi.shop.dto.ProductCreateRequest;
 import com.ferdi.shop.model.Product;
 import com.ferdi.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -68,8 +69,8 @@ public class ProductController {
 
     // Delete a product by ID
     @DeleteMapping("/products/{id}")
-    public String deleteProduct(@PathVariable int id) {
+    public ResponseEntity<Object> deleteProduct(@PathVariable int id) {
         service.deleteProduct(id);
-        return "Product with ID " + id + " deleted successfully.";
+        return ResponseEntity.noContent().build();
     }
 }

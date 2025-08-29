@@ -1,5 +1,5 @@
 import React from "react";
-
+import { deleteProduct } from "../services/productService";
 const ProductCard = ({
   product,
   mode,
@@ -9,6 +9,24 @@ const ProductCard = ({
   onDelete,
   onToggleActive,
 }) => {
+  //for delete product
+  const handleDelete = async () => {
+    if (
+      !window.confirm(
+        `Delete ${product.name} with a product id: ${product.id}?`
+      )
+    )
+      return;
+
+    try {
+      await deleteProduct(product.id);
+      console.log("Deleted product", product.id);
+      onDelete(product.id); // trigger refresh in parent
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete product");
+    }
+  };
   // Fallback image if product.imageUrl is missing or broken
   const imageUrl = product.imageUrl
     ? `http://localhost:8080${product.imageUrl}`
@@ -62,7 +80,7 @@ const ProductCard = ({
               Edit
             </button>
             <button
-              onClick={() => onDelete(product)}
+              onClick={handleDelete}
               className="bg-red-700 rounded-md p-2 text-white hover:bg-red-900"
             >
               Delete
