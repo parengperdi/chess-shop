@@ -21,7 +21,7 @@ public class ProductController {
     private ProductService service;
 
     // Health check
-    @GetMapping("/")
+    @GetMapping("/landing")
     public String greet() {
         return "Landing";
     }
@@ -73,4 +73,13 @@ public class ProductController {
         service.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
+
+
+    //Toggle product active status
+    @PutMapping("/products/{id}/toggle")
+    public ResponseEntity<Product> toggleProductStatus(@PathVariable int id) {
+    Product updatedProduct = service.toggleProductStatus(id);
+    return ResponseEntity.ok(updatedProduct);
+}
+    
 }
