@@ -7,8 +7,6 @@ const AddProductForm = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [rating, setRating] = useState("");
-  const [numberOfSales, setNumberOfSales] = useState("");
   const [imageFile, setImageFile] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -20,8 +18,6 @@ const AddProductForm = () => {
     fd.append("price", price);
     fd.append("category", category);
     fd.append("quantity", quantity);
-    fd.append("rating", rating);
-    fd.append("numberOfSales", numberOfSales);
     if (imageFile) fd.append("image", imageFile);
 
     try {
@@ -43,8 +39,6 @@ const AddProductForm = () => {
       <input className="border-black border-2 p-1 w-36 rounded-md" type="number" placeholder="Price" value={price} onChange={e => setPrice(e.target.value)} required />
       <input className="border-black border-2 p-1 w-36 rounded-md" type="text" placeholder="Category" value={category} onChange={e => setCategory(e.target.value)} required />
       <input className="border-black border-2 p-1 w-36 rounded-md" type="number" placeholder="Quantity" value={quantity} onChange={e => setQuantity(e.target.value)} required />
-      <input className="border-black border-2 p-1 w-36 rounded-md" type="number" placeholder="Rating" value={rating} onChange={e => setRating(e.target.value)} step="0.1" required />
-      <input className="border-black border-2 p-1 w-36 rounded-md" type="number" placeholder="Number of Sales" value={numberOfSales} onChange={e => setNumberOfSales(e.target.value)} required />
       <input className="border-black border-2 p-1 w-36 rounded-md" type="file" onChange={e => setImageFile(e.target.files[0])} />
       <button type="submit" className="bg-blue-600 text-white p-2 rounded w-36 p-auto">Add Product</button>
     </form>
