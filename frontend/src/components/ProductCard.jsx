@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteProduct } from "../services/productService";
+import { deleteProduct, toggleProductStatus } from "../services/productService";
 const ProductCard = ({
   product,
   mode,
@@ -27,6 +27,18 @@ const ProductCard = ({
       alert("Failed to delete product");
     }
   };
+
+  //for toggle active status
+  const handleToggle = async (id) => {
+    try {
+      await toggleProductStatus(id);
+      if (onToggleActive) onToggleActive(id);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to toggle product status");
+    }
+  };
+
   // Fallback image if product.imageUrl is missing or broken
   const imageUrl = product.imageUrl
     ? `http://localhost:8080${product.imageUrl}`
@@ -38,71 +50,89 @@ const ProductCard = ({
   };
 
   return (
-    <div className="bg-stone-500 p-4 rounded-xl ">
-      <div className="bg-stone-500  rounded-xl w-auto">
-        <div className="w-full h-48 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-          {product.imageUrl ? (
-            <img
-              src={`http://localhost:8080${product.imageUrl}`}
-              alt={product.name}
-              onError={handleImageError}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <span className="text-gray-600">No Image</span>
-          )}
-        </div>
-      </div>
-      <div className="flex gap-4">
-        <h2 className="text-lg font-semibold pl-1">{product.name}</h2>
-        <p className="text-white pl-1">{product.brand}</p>
-      </div>
-      <div className="flex gap-4">
-        <p className="text-rose-950 font-bold pl-1">${product.price}</p>
-        <p className="text-sm text-lime-950 font-extrabold pl-1">
-          In stock: {product.quantity}
-        </p>
-        <p className="text-sm  text-red-950 font-extrabold w-20 pl-1 rounded-lg mb-1">
-          Rating: {product.rating}
-        </p>
-        <p className="text-sm text-zinc-800 font-extrabold w-20 pl-1 rounded-lg">
-          Sold: {product.numberOfSales}
-        </p>
+    <div className="bg-slate-100 border border-gray-300 rounded-2xl shadow-sm p-4 w-80 flex flex-col hover:shadow-slate-400 hover:shadow-md hover:scale-105 transition-all duration-700">
+      {/* Product Image */}
+      <div className="w-full h-44 bg-gray-100 rounded-xl overflow-hidden flex items-center justify-center">
+        {product.imageUrl ? (
+          <img
+            src={`http://localhost:8080${product.imageUrl}`}
+            alt={product.name}
+            onError={handleImageError}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <span className="text-gray-400 text-sm">No Image</span>
+        )}
       </div>
 
-      <div className="flex justify-end mt-2 gap-2">
+      {/* Product Info */}
+      <div className="mt-3 space-y-1">
+        <h2 className="text-lg font-semibold text-gray-900 truncate">
+          {product.name}
+        </h2>
+        <p className="text-sm text-gray-500">{product.brand}</p>
+        <p className="text-lg font-bold text-gray-800">${product.price}</p>
+      </div>
+
+      {/* Stock & Meta */}
+      <div className="mt-2 flex justify-between text-xs text-gray-500">
+        <span>Stock: {product.quantity}</span>
+        <span>{product.rating} ⭐</span>
+        {/* <span>
+          {product.rating > 4
+            ? "⭐⭐⭐⭐⭐"
+            : product.rating > 3
+            ? "⭐⭐⭐⭐"
+            : product.rating > 2
+            ? "⭐⭐⭐"
+            : product.rating > 1
+            ? "⭐⭐"
+            : product.rating === 0
+            ? "☆"
+            : "⭐"}
+          {product.rating}
+        </span> */}
+        <span>Sold: {product.numberOfSales}</span>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex justify-between mt-4 gap-2">
         {mode === "admin" ? (
           <>
             <button
               onClick={() => onEdit(product)}
-              className="bg-green-700 rounded-md p-2 text-black hover:bg-green-900"
+              className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-2 rounded-lg  hover:scale-105 transition-all duration-200"
             >
               Edit
             </button>
             <button
               onClick={handleDelete}
-              className="bg-red-700 rounded-md p-2 text-white hover:bg-red-900"
+              className="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg hover:scale-105 transition-all duration-200"
             >
               Delete
             </button>
             <button
-              onClick={() => onToggleActive(product)}
-              className="bg-stone-900 rounded-md p-2 text-white hover:bg-stone-950"
+              onClick={() => handleToggle(product.id)}
+              className={`flex-1 text-white text-sm font-medium py-2 rounded-lg hover:scale-105 transition-all duration-200 ${
+                product.active
+                  ? "bg-blue-600 hover:bg-blue-700"
+                  : "bg-gray-700 hover:bg-gray-800"
+              }`}
             >
-              {product.active ? "Deactivate" : "Activate"}
+              {product.active ? "Activated" : "Activate"}
             </button>
           </>
         ) : (
           <>
             <button
               onClick={() => onAddToCart(product)}
-              className="bg-stone-300 rounded-md p-2 text-black hover:bg-stone-400"
+              className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 text-sm font-medium py-2 rounded-lg hover:scale-105 transition-all duration-200"
             >
               Add to Cart
             </button>
             <button
               onClick={() => onBuyNow(product)}
-              className="bg-stone-900 rounded-md p-2 text-white hover:bg-stone-950"
+              className="flex-1 bg-black hover:bg-gray-900 text-white text-sm font-medium py-2 rounded-lg hover:scale-105 transition-all duration-200"
             >
               Buy Now
             </button>
