@@ -26,8 +26,10 @@ const AdminPage = () => {
             onDelete={(id) => {
               setProducts((prev) => prev.filter((p) => p.id !== id));
             }}
-            onToggleActive={(product) => {
-              console.log("deactivated", product.id);
+            onToggleActive={(id) => {
+              setProducts((prev) =>
+                prev.map((p) => (p.id === id ? { ...p, active: !p.active } : p))
+              );
             }}
           />
         ))}
