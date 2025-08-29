@@ -26,6 +26,6 @@ public class Product {
     private int quantity;
     private double rating;
     private int numberOfSales;
-    private boolean active = true;
-    private String imageUrl = "/uploads/default.png";
+    private boolean active;
+    private String imageUrl;
 }

@@ -16,5 +16,6 @@ public class ProductCreateRequest {
     private int quantity;
     private double rating;
     private int numberOfSales;
+    private boolean active;
     private MultipartFile image;
 }

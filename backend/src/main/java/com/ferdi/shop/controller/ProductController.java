@@ -58,8 +58,9 @@ public class ProductController {
         product.setPrice(request.getPrice());
         product.setCategory(request.getCategory());
         product.setQuantity(request.getQuantity());
-        product.setRating(request.getRating());
-        product.setNumberOfSales(request.getNumberOfSales());
+        product.setRating(0);
+        product.setNumberOfSales(0);
+        product.setActive(true);
         product.setImageUrl(imageUrl);
 
         return service.saveProduct(product);
