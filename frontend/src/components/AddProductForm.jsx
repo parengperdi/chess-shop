@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { addProduct } from "../services/productService";
 
 const AddProductForm = () => {
   const [name, setName] = useState("");
@@ -21,11 +22,9 @@ const AddProductForm = () => {
     if (imageFile) fd.append("image", imageFile);
 
     try {
-      const res = await axios.post("http://localhost:8080/api/products", fd, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await addProduct(fd);
       alert("Product added successfully!");
-      console.log(res.data);
+      console.log(res);
     } catch (err) {
       console.error(err);
       alert("Error adding product");
