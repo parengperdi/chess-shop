@@ -41,30 +41,7 @@ public class ProductController {
     // Create a new product
     @PostMapping(value = "/products", consumes = "multipart/form-data")
     public Product createProduct(@ModelAttribute ProductCreateRequest request) throws IOException {
-        String uploadDir = System.getProperty("user.dir") + "/uploads";
-        Files.createDirectories(Paths.get(uploadDir));
-        // Handle file upload
-        String imageUrl = null;
-        if (request.getImage() != null && !request.getImage().isEmpty()) {
-            String fileName = System.currentTimeMillis() + "_" + request.getImage().getOriginalFilename();
-            Path filePath = Paths.get(uploadDir, fileName);
-            request.getImage().transferTo(filePath.toFile());
-            imageUrl = "/uploads/" + fileName;
-        }
-
-        // Map DTO to entity
-        Product product = new Product();
-        product.setName(request.getName());
-        product.setBrand(request.getBrand());
-        product.setPrice(request.getPrice());
-        product.setCategory(request.getCategory());
-        product.setQuantity(request.getQuantity());
-        product.setRating(0);
-        product.setNumberOfSales(0);
-        product.setActive(true);
-        product.setImageUrl(imageUrl);
-
-        return service.saveProduct(product);
+        return service.createProduct(request);
     }
 
     // Delete a product by ID
@@ -78,8 +55,17 @@ public class ProductController {
     //Toggle product active status
     @PutMapping("/products/{id}/toggle")
     public ResponseEntity<Product> toggleProductStatus(@PathVariable int id) {
-    Product updatedProduct = service.toggleProductStatus(id);
-    return ResponseEntity.ok(updatedProduct);
-}
+        Product updatedProduct = service.toggleProductStatus(id);
+        return ResponseEntity.ok(updatedProduct);
+    }
+
+    // @PutMapping(value = "/products/{id}", consumes = "multipart/form-data")
+    // public ResponseEntity<Product> updateProduct(
+    //           @PathVariable int id,
+    //           @ModelAttribute ProductCreateRequest request
+    // ) throws IOException {
+    //     Product updatedProduct = service.updateProduct(id, request);
+    //     return ResponseEntity.ok(updatedProduct);
+    // }
     
 }

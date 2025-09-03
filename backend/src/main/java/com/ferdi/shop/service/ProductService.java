@@ -1,25 +1,51 @@
 package com.ferdi.shop.service;
 
+import com.ferdi.shop.dto.ProductCreateRequest;
 import com.ferdi.shop.exception.ResourceNotFoundException;
 import com.ferdi.shop.model.Product;
 import com.ferdi.shop.repo.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ferdi.shop.service.FileStorageService;
+
+import java.io.IOException;
 import java.util.List;
 
 @Service
 public class ProductService {
 
-    @Autowired
-    private ProductRepo repo;
+    private final ProductRepo repo;
+    private final FileStorageService fileStorageService;
+
+    
+    public ProductService(ProductRepo repo, FileStorageService fileStorageService) {
+        this.repo = repo;
+        this.fileStorageService = fileStorageService;
+    }
 
     // Get all products
     public List<Product> getAllProducts() {
         return repo.findAll();
     }
 
-    // Save a new product
-    public Product saveProduct(Product product) {
+    // Create a product
+    public Product createProduct(ProductCreateRequest request) throws IOException {
+           String imageUrl = null;
+        if (request.getImage() != null && !request.getImage().isEmpty()) {
+            imageUrl = fileStorageService.saveFile(request.getImage());
+        }
+
+        Product product = new Product();
+        product.setName(request.getName());
+        product.setBrand(request.getBrand());
+        product.setPrice(request.getPrice());
+        product.setCategory(request.getCategory());
+        product.setQuantity(request.getQuantity());
+        product.setRating(0);
+        product.setNumberOfSales(0);
+        product.setActive(true);
+        product.setImageUrl(imageUrl);
+
         return repo.save(product);
     }
 
