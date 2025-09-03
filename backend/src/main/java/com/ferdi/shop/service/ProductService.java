@@ -28,6 +28,11 @@ public class ProductService {
         return repo.findAll();
     }
 
+    // Get all active products
+    public List<Product> getActiveProducts() {
+    return repo.findByActiveTrue(); 
+    }
+
     // Create a product
     public Product createProduct(ProductCreateRequest request) throws IOException {
            String imageUrl = null;

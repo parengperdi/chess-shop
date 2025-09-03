@@ -1,13 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { getAllProducts } from "../services/productService";
+import { getActiveProducts } from "../services/productService";
 import ProductCard from "../components/ProductCard";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getAllProducts().then(setProducts);
+    getActiveProducts().then(setProducts);
   }, []);
   return (
     <div>

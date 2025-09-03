@@ -38,6 +38,12 @@ public class ProductController {
         return service.getProductById(id);
     }
 
+    // Get all active products
+    @GetMapping("/products/active")
+        public List<Product> getActiveProducts() {
+        return service.getActiveProducts();
+    }
+
     // Create a new product
     @PostMapping(value = "/products", consumes = "multipart/form-data")
     public Product createProduct(@ModelAttribute ProductCreateRequest request) throws IOException {

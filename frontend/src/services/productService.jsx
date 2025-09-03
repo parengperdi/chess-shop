@@ -10,9 +10,15 @@ export const addProduct = async (formData) => {
   return response.data;
 };
 
-//get all products
+//get all products (admin view)
 export const getAllProducts = async () => {
   const response = await axios.get(`${BASE_URL}/products`);
+  return response.data;
+};
+
+//get all active products (user view)
+export const getActiveProducts = async () => {
+  const response = await axios.get(`${BASE_URL}/products/active`);
   return response.data;
 };
 
