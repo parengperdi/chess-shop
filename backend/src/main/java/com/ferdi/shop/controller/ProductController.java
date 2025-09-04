@@ -65,13 +65,14 @@ public class ProductController {
         return ResponseEntity.ok(updatedProduct);
     }
 
-    // @PutMapping(value = "/products/{id}", consumes = "multipart/form-data")
-    // public ResponseEntity<Product> updateProduct(
-    //           @PathVariable int id,
-    //           @ModelAttribute ProductCreateRequest request
-    // ) throws IOException {
-    //     Product updatedProduct = service.updateProduct(id, request);
-    //     return ResponseEntity.ok(updatedProduct);
-    // }
+    // Update a product
+    @PutMapping(value = "/products/{id}", consumes = "multipart/form-data")
+    public ResponseEntity<Product> updateProduct(
+              @PathVariable int id,
+              @ModelAttribute ProductCreateRequest request
+    ) throws IOException {
+        Product updatedProduct = service.updateProduct(id, request);
+        return ResponseEntity.ok(updatedProduct);
+    }
     
 }

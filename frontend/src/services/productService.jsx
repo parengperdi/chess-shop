@@ -2,12 +2,18 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/api";
 
-//createa new product
+//create a new product
 export const addProduct = async (formData) => {
   const response = await axios.post(`${BASE_URL}/products`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return response.data;
+};
+
+//update a product
+export const updateProduct = async (id, formData) => {
+  const res = await axios.put(`${BASE_URL}/products/${id}`, formData);
+  return res.data;
 };
 
 //get all products (admin view)

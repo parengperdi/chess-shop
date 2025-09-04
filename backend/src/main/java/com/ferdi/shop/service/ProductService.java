@@ -68,6 +68,27 @@ public class ProductService {
         repo.delete(product);
     }
 
+    //update a product
+    public Product updateProduct(int id, ProductCreateRequest request) throws IOException {
+    Product product = repo.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Product not found with ID: " + id));
+
+    // overwrite with current values from the form (the form is prefilled)
+    product.setName(request.getName());
+    product.setBrand(request.getBrand());
+    product.setPrice(request.getPrice());
+    product.setCategory(request.getCategory());
+    product.setQuantity(request.getQuantity());
+
+    // only replace image when a new one was provided
+    if (request.getImage() != null && !request.getImage().isEmpty()) {
+        String imageUrl = fileStorageService.saveFile(request.getImage());
+        product.setImageUrl(imageUrl);
+    }
+
+    return repo.save(product);
+    }
+
     // Toggle product active status
     public Product toggleProductStatus(int id) {
     Product product = repo.findById(id)
