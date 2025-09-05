@@ -4,6 +4,7 @@ import ProductModal from "../components/ProductModal";
 import ProductForm from "../components/ProductForm";
 import { getAllProducts, addProduct } from "../services/productService";
 import axios from "axios";
+import Navbar from "../components/NavBar";
 
 const AdminPage = () => {
   const [products, setProducts] = useState([]);
@@ -35,6 +36,7 @@ const AdminPage = () => {
 
   return (
     <div>
+      <Navbar></Navbar>
       <h1 className="text-2xl font-bold text-center">Admin Page</h1>
       <div className="flex justify-center my-4">
         <button
