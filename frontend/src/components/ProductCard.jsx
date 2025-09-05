@@ -50,7 +50,7 @@ const ProductCard = ({
   };
 
   return (
-    <div className="bg-slate-50 border border-gray-300 rounded-2xl shadow-sm p-4 w-80 flex flex-col hover:shadow-slate-400 hover:shadow-md hover:scale-105 transition-all duration-700 hover:bg-slate-100">
+    <div className="bg-slate-50 border border-gray-300 rounded-2xl shadow-sm p-4 w-80 flex flex-col hover:shadow-slate-400 hover:shadow-md   hover:bg-stone-100">
       {/* Product Image */}
       <div className="w-full h-44 bg-gray-100 rounded-xl overflow-hidden flex items-center justify-center">
         {product.imageUrl ? (
@@ -58,7 +58,7 @@ const ProductCard = ({
             src={`http://localhost:8080${product.imageUrl}`}
             alt={product.name}
             onError={handleImageError}
-            className="w-full h-full object-cover "
+            className="w-full h-full object-cover hover:scale-105 transition-all duration-700"
           />
         ) : (
           <span className="text-gray-400 text-sm">No Image</span>
