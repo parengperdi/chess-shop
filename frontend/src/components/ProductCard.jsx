@@ -126,13 +126,13 @@ const ProductCard = ({
           <>
             <button
               onClick={() => onAddToCart(product)}
-              className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 text-sm font-medium py-2 rounded-lg hover:scale-105 transition-all duration-200"
+              className="flex-1 bg-gray-200 hover:bg-black hover:text-white text-gray-900 text-sm font-medium py-2 rounded-lg hover:scale-105 transition-all duration-300"
             >
               Add to Cart
             </button>
             <button
               onClick={() => onBuyNow(product)}
-              className="flex-1 bg-black hover:bg-gray-900 text-white text-sm font-medium py-2 rounded-lg hover:scale-105 transition-all duration-200"
+              className="flex-1 bg-black hover:bg-gray-200 hover:text-gray-900 text-white text-sm font-medium py-2 rounded-lg hover:scale-105 transition-all duration-300"
             >
               Buy Now
             </button>
